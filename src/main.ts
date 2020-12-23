@@ -1,6 +1,7 @@
 import * as core from "@actions/core";
 import { deploy } from "@samkirkland/ftp-deploy";
 import { IFtpDeployArguments } from "@samkirkland/ftp-deploy/dist/types";
+import pRetry from 'p-retry';
 import { optionalInt, optionalProtocol, optionalString, optionalBoolean, optionalStringArray, optionalLogLevel, optionalSecurity } from "./parse";
 
 async function runDeployment() {
@@ -21,7 +22,7 @@ async function runDeployment() {
       "security": optionalSecurity("security", core.getInput("security"))
     };
 
-    await deploy(args);
+    await pRetry(() => deploy(args), {retries: 5});
   }
   catch (error) {
     core.setFailed(error);
