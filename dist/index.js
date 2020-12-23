@@ -2654,7 +2654,7 @@ class Client {
          */
         this.availableListCommands = ["MLSD", "LIST -a", "LIST"];
         this.ftp = new FtpContext_1.FTPContext(timeout);
-        this.prepareTransfer = this._enterFirstCompatibleMode([transfer_1.enterPassiveModeIPv6, transfer_1.enterPassiveModeIPv4]);
+        this.prepareTransfer = this._enterFirstCompatibleMode([transfer_1.enterPassiveModeIPv4, transfer_1.enterPassiveModeIPv6]);
         this.parseList = parseList_1.parseList;
         this._progressTracker = new ProgressTracker_1.ProgressTracker();
     }
