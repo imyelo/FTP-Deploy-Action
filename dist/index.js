@@ -2200,6 +2200,7 @@ function deploy(deployArgs) {
         timings.stop("hash");
         createLocalState(localFiles, logger, args);
         const client = new ftp.Client();
+        client.prepareTransfer = ftp.enterPassiveModeIPv4;
         global.reconnect = function () {
             return __awaiter(this, void 0, void 0, function* () {
                 timings.start("connecting");
